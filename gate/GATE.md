@@ -24,9 +24,36 @@ deadline 26 Nov 2026 21:50 WIB · Force_Last, max 5/day · transcripts required.
 
 ## Scores (local, simulated)
 
-- reproduces: from kit check (see kit-check output).
-- authored share: from kit check (target ≥ 30%).
+- reproduces: UNKNOWN — no bundle exists yet (see blocker below), so the
+  transcript gate has never run; the kit check skips all thinking_* checks.
+  Do NOT quote a reproduces % for this build.
+- authored share: UNKNOWN for the same reason (target ≥ 30% at bundle time).
 - No local judge score exists for this competition (server grades every entry).
+
+## Kit check actually run (26 Nov 2026 15:49 WIB, --worktree, no transcripts)
+
+- PASS competition_open, snapshot (5 files, 6,933 B), license_osi (MIT),
+  entrypoint (main.py, python3.13).
+- FAIL transcripts_present — no transcripts uploaded (no bundle).
+- SKIP all 14 transcript-gate checks (no session parsed).
+- At-submission checks (repo_public, repo_owner, repo_created_after_open,
+  commit_in_repo, duplicate_snapshot) are decided by the site at submit
+  time from GitHub: repo is public, owner cashbags = account login, created
+  08:45 UTC after the 07:51 UTC open, commit b2605598 is on main, files are
+  original work.
+
+## BLOCKER — bundle needs a git repository (verbatim)
+
+`makefun bundle: /home/hatch/workspace/makefun/bounties/u-kiencx-sorry-i-heard-that-wrong-1858c729/entry is not inside a git repository`
+
+No `.git` exists on the path to the entry dir, and creating or aligning a
+local git checkout after the Contents-API push is forbidden by the build
+spec, so no bundle was made and the transcript gate is untested. Needs a
+parent decision (e.g. authorise a clone in a live session, or another
+bundling route). Secondary known limit: muse.db returns 0 usage rows for
+this run (rows flush only after the run completes), so even with a bundle,
+thinking_priced would fail until a live-session re-bundle — the same
+READY-HELD state as today's earlier batches.
 
 ## Notes
 
